@@ -1,0 +1,58 @@
+% Chapter 1
+
+\chapter{Introduction} % Main chapter title
+
+\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{sec:introduction}
+%----------------------------------------------------------------------------------------
+
+% Define some commands to keep the formatting separated from the content 
+
+
+%----------------------------------------------------------------------------------------
+
+{\em Coalition formation (CF)} is a paradigm widely studied in multiagent systems and economics, as means of forming teams of autonomous, rational agents working towards a common goal~\cite{chalkiadakis2011computational}.
+One domain where the formation of coalitions comes naturally into play is the so-called {\em vehicle-to-grid (V2G)} problem. In V2G, battery-equipped {\em electric vehicles (EVs)} communicate and strike deals with the electricity Grid in order to either lower their power demands, or return power back to the network when there is a peak in the request for power. This helps the Grid to maintain 
+a balanced power load~\cite{ramchurn2012putting}. 
+G2V is V2G's ``sister'' problem, where EVs connect and draw power from the Grid without overloading it~\cite{valogianni2014effective}. 
+In both cases, the coordination of EVs efforts, is essential.
+
+As such, several recent approaches have called for the formation of EV coalitions in order to tackle the V2G problem~\cite{deORamos2014,kamboj2010exploring,kamboj2011deploying}.
+The existing approaches, however, typically exhibit the following characteristics: {\em (a)} they attempt to form {\em optimal} coalitions or coalition structures; and {\em (b)} they either attempt to form coalitions with respect to a single criterion, or employ lengthy negotiation protocols in order to capture various coalitional requirements while respecting the constraints of individual agents. 
+
+The inherent hardness of the optimal coalition structure generation problem~\cite{rahwan2009anytime}, however, and the fact that negotiation protocols can be lengthy and thus highly time consuming, severely restricts the practicality and scalability of such algorithms: they can handle at most a few hundred EVs. In reality though, there exist hundreds of thousands of EVs that connect to the Grid, and could potentially offer their services; any formed coalition would be required to possess {\em a multitude of desirable characteristics} (e.g., high collective storage capacity, and high collective discharge rate); and, if the aim is to balance electricity demand in real time, any such service should be offered by the appropriate coalition almost instantaneously.
+
+In this paper, we overcome the aforementioned difficulties by employing, for the first time in the literature, {\em hypergraphs} to achieve the timely formation of coalitions that satisfy {\em multiple criteria}\footnote{A sketch of these ideas appeared in a short ECAI-2016 paper~\cite{christianos2016}.}. In our approach, EV agents that share specific characteristics are organised into {\em hyperedges}. Then, building on the existing hypergraphs 
+literature~\cite{eiter1995identifying,zhou2006learning}, we propose algorithms for {\em (i)} hypergraph {\em pruning},  to focus on interesting parts of the search space; 
+{\em (ii)}  hypergraph {\em transversal} to identify sets of vertices (agents) that combine several desirable characteristics; and {\em (iii)} hypegraph {\em clustering}, that allows the identification of clusters of high quality agents. Moreover, we put forward {\em (iv)}  a heuristic formation algorithm that benefits from pruning and generates high quality coalitions near-instantaneously, while scaling linearly with the number of agents.
+
+In contrast to existing approaches, we do not attempt to generate an optimal coalition structure, nor do we attempt to compute a single optimal coalition.
+Instead, we exploit the hypergraph representation of our problem in order to select agents and form highly effective coalitions, while being able to scale to {\em dozens of thousands} of agents within fractions of a second; and, in the case of our heuristic method, even to {\em millions} of EV agents in seconds.
+%We deliberately sacrifice the ability to find the optimal solution so that we can process thousands of EV's in a few seconds.
+
+Though here we apply it to the V2G problem, our approach is generic and can be used in {\em any} coalition formation setting.
+It is perhaps surprising that a powerful model like hypergraphs has not been so far exploited for devising efficient coalition formation methods, despite its intuitive connections to the concept of coalitions. Regardless, we are not aware of any work to date that has exploited hypergraphs and related algorithms in order to perform {\em real-time}, {\em large-scale}, {\em multi-criteria} coalition formation, as we do in this paper.
+
+%----
+
+%Electric vehicles (EVs) are a promising new concept for the automotive industry. EVs use energy stored in a battery and electric motors to generate propulsion. Electricity offers many advantages %against petrol-powered vehicles. Specifically, EVs are cost effective and require less maintenance, and thus have no emissions since they run in electricity powered engines. The growing popularity of EVs %gives rise to the so-called G2V and V2G problems. G2V describes a system where EVs connect and draw power from the Grid without overloading it\cite{valogianni2014effective}. V2G is the problem of EVs %communicating with the Grid in order to either lower their power demands or return power back to the network when there is a peak in the request for power. This helps the Grid to maintain a balanced power %load\cite{ramchurn2012putting}. This is the problem we will be dealing with in this paper.
+
+%	An important issue in the V2G problem is that there are possibly millions of EVs which communicate and connect to the Grid. The vast number of vehicles means that we must create the most appropriate %groups to cover the needs of the Grid at any given time. Algorithms that scale well and give results almost instantly are necessary. 
+
+%	In order to tackle the V2G problem, we resort to coalition formation. Specifically, we propose the formation of coalitions using hypergraphs. By doing so, we can efficiently locate reliable agents and form %effective EV cooperatives to provide sufficient energy and stability. 
+
+%	Such attempts use mostly machine learning or attempting to form the optimal coalition\cite{deORamos2014}\cite{valogianni2014effective}. This had the drawback that it did not scale to more than a few %hundred agents \cite{kamboj2010exploring} \cite{deORamos2014}. Besides, the approaches that have been used do not deal with multi-criteria optimization. This is important, however because in reality %coalitions have to be formed according to several criteria such as capacity and discharge rate. In our attempt, we will try to form coalitions by selecting vehicles from a huge pool of individual EVs using 
+% multiple criteria for our selections. 
+
+
+%	The Grid should be able to advertise the amount of power it requires by both asking for a required capacity and a maximum discharge rate. What we are trying to do is fulfill the required capacity and %discharge rate with the minimum amount of vehicles and by keeping our coalition reliable. We are not searching for an optimal coalition but rather for one that can be generated quickly and reliably. We do %this by organizing our electric vehicles inside a hypergraph. Current research and solutions on the V2G problem do not scale well. It should be noted that it is also the first attempt to use hypergraphs for %coalition generation. Hypergraphs are well studied, and powerful algorithms do exist for traversing and exploring them. 
+
+%	In a few words, we start with a huge pool of EVs. We know their power capacity, discharge rate and if they are committed to connect to the Grid. We also know their reliability. The Grid advertises the demand of a coalition with a specific capacity and discharge rate. We form a coalition that fulfills the power requirements and has a high reliability while also being small in size. 
+%	Now in order to build coalitions for the V2G we need to combine the capabilities of EVs. This naturally gives rise to a multi-criterion selection problem for choosing the members of a coalition. In order to tackle this problem, we propose a novel, principled approach in order to form coalitions that have specific characteristics. For this we employ the use of hypergraphs and research that has been done on them \cite{zhou2006learning} \cite{kavvadias2005efficient}
+
+%	In general the related work\cite{kamboj2010exploring}\cite{kamboj2011deploying}\cite{deORamos2014}\cite{valogianni2014effective} focuses in single-criteria coalition formation and in near-optimal %solutions that require great processing power and scale poorly. 
+
+%  ***** AYTO as to exoume ypopsin gia pi8anes erwthseis ****
+%First of all, while multiple criteria can usually be expressed as a single one with the help of a utility function, we find that multi-criteria is a more natural way to express the agent's attributes. As such we do not use directly utility functions.
+
+%	To continue while finding the optimal coalition is useful in most cases it can't work in real world situations where there could be millions of EVs, and the requirements could be updated every few seconds. Therefore, we sacrifice the ability to find the optimal solution so that we can process thousands of EV's in a few seconds.
