@@ -3,15 +3,11 @@
 \chapter{Introduction} % Main chapter title
 
 \label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
-\label{sec:introduction}
+%\label{sec:introduction}
 %----------------------------------------------------------------------------------------
-
-% Define some commands to keep the formatting separated from the content 
-
 
 %----------------------------------------------------------------------------------------
 
-{\em Coalition formation (CF)} is a paradigm widely studied in multiagent systems and economics, as means of forming teams of autonomous, rational agents working towards a common goal~\cite{chalkiadakis2011computational}.
 One domain where the formation of coalitions comes naturally into play is the so-called {\em vehicle-to-grid (V2G)} problem. In V2G, battery-equipped {\em electric vehicles (EVs)} communicate and strike deals with the electricity Grid in order to either lower their power demands, or return power back to the network when there is a peak in the request for power. This helps the Grid to maintain 
 a balanced power load~\cite{ramchurn2012putting}. 
 G2V is V2G's ``sister'' problem, where EVs connect and draw power from the Grid without overloading it~\cite{valogianni2014effective}. 
@@ -33,6 +29,19 @@ Instead, we exploit the hypergraph representation of our problem in order to sel
 Though here we apply it to the V2G problem, our approach is generic and can be used in {\em any} coalition formation setting.
 It is perhaps surprising that a powerful model like hypergraphs has not been so far exploited for devising efficient coalition formation methods, despite its intuitive connections to the concept of coalitions. Regardless, we are not aware of any work to date that has exploited hypergraphs and related algorithms in order to perform {\em real-time}, {\em large-scale}, {\em multi-criteria} coalition formation, as we do in this paper.
 
+\section{Electric Vehicles}
+
+Electric vehicles (EVs) are a promising new concept for the automotive industry. EVs use energy stored in a battery and electric motors to generate propulsion. Electricity offers many advantages against petrol-powered vehicles. Specifically, EVs are cost effective and require less maintenance, and thus have no emissions since they run in electricity powered engines. The growing popularity of EVs~\cite{globalev2016} and their energy consumption is something that needs to be evaluated when worked
+
+\section{Coalition Formation}
+{\em Coalition formation (CF)} is a paradigm widely studied in multiagent systems and economics, as means of forming teams of autonomous, rational agents working towards a common goal~\cite{chalkiadakis2011computational}. Individual agents usually have different degrees of efficiency. Thus, we must form groups of agents with characteristics that compliment each other and exploit their individual strengths\cite{shehory1998methods}.
+As discussed in~\cite{sandholm1999coalition}, coalition formation has three activities. {\em Coalition structure generation}, being the first, is the partitioning of the set of agents into mutually disjoint coalitions (or groups), in a way that the resulting coalitions maximize the sum of the rewards of all agents (known as social welfare)~\cite{rahwan2009anytime}. Next is {\em the optimizations problem} of each coalition, that tries to maximize the rewards from outside the coalition and optimize the allocation of resources and tasks between agents of the respective coalition. The last activity of CF, is the {\em division of the rewards} among agents. This must be done in such a way that the rewards are fair, and no agent can be motivated to leave his coalition.
+
+Finding the optimal coalition structure is generally computationally expensive, especially in a large set of agents, and the computational requirements grow exponentially. As such, finding in a respectable time a CS that is within a bound of the optimal one, is also hard problem. There are several attempts to solve this problem~\cite{sandholm1999coalition}~\cite{rahwan2009anytime}.
+
+Nevertheless in this thesis, we will not attempt to solve the CSG problem. Instead we will focus on finding a simple coalition that is able to perform a specific task. Such a coalition will be created by selecting agents from an extensive set, in a way that the result can efficiently handle the appointed task. In addition each agent will have several attributes that contribute in different ways to the completion of the goal. We will not be using a utility function (that ultimately combines the attributes, losing accuracy). That will be called {\em multi-criteria} coalition formation. Due to the nature of this problem, the results cannot be easily evaluated. There is possibly a great number of possible coalitions with similar capacity to handle the task. In addition, since the agent set is magnitudes larger that what usual optimal CF algorithms can handle we cannot find how close to optimality our solution is. Thus we will focus on creating coalitions that can complete the task efficiently and can be generated in a minimal amount of time.
+
+This problem can be quite natural in todays world. There are several real world examples where efficiency is sacrificed for performance. In this thesis, we will present a way to form an EV coalition in just a few seconds, able to fulfill the energy requirements of the Smart Grid.
 %----
 
 %Electric vehicles (EVs) are a promising new concept for the automotive industry. EVs use energy stored in a battery and electric motors to generate propulsion. Electricity offers many advantages %against petrol-powered vehicles. Specifically, EVs are cost effective and require less maintenance, and thus have no emissions since they run in electricity powered engines. The growing popularity of EVs %gives rise to the so-called G2V and V2G problems. G2V describes a system where EVs connect and draw power from the Grid without overloading it\cite{valogianni2014effective}. V2G is the problem of EVs %communicating with the Grid in order to either lower their power demands or return power back to the network when there is a peak in the request for power. This helps the Grid to maintain a balanced power %load\cite{ramchurn2012putting}. This is the problem we will be dealing with in this paper.
