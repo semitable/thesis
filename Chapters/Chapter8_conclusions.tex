@@ -1,0 +1,29 @@
+% Chapter 1
+
+\chapter{Conclusions and Future Work} % Main chapter title
+
+\label{Chapter8_results} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+	In this thesis, we demonstrated how to employ hypergraphs for creating coalitions based on multiple criteria.  
+The existence of several hypergraph transversal and clustering algorithms
+makes hypergraphs easy to work with. Moreover, the ability to select almost instantaneously parts of the hypergraph that are interesting, offers a significant advantage, 
+enabling one to generate coalitions with desirable characteristics within seconds. This makes hypergraph use quite attractive for real-world, real-time scenarios.
+
+We presented several coalition formation methods that employ hypergraphs for tackling the V2G problem, and evaluated their performance. 
+Our proposed heuristic algorithm, in particular, was shown to be the most effective and efficient of our methods, 
+as it is able to use a minimal number of EVs to provide the required capacity, discharge rate, and reliability to the Grid in a few milliseconds; while it exhibits exceptional scaling behaviour with respect to the number of EVs under consideration. Ours is the first approach that is able to deal with {\em large-scale} coalition formation for the V2G problem, while taking {\em multiple criteria} into account for creating the EV coalitions.
+
+Future work includes implementing a more efficient {\em minimal transversal} algorithm as follows.
+
+Finding all the minimal transversals of a hypergraph is a computationally difficult task. As the size of the graph increases the number of patterns increases - exponentially in the worst case scenario. Nevertheless, while the pool of EVs might be huge, a coalition meeting the requirements could be small enough and require only a handful of transversals to be generated. 
+
+For this reason, it is worth exploring ways to generate transversals in a depth-first manner. This would enable us to create as many as we required to fulfill the requirements of the coalition. Such an attempt was presented in~\cite{kavvadias2005efficient}. This paper suggest a way to create transversals one by one as opposed to generating simultaneously all sets of each size, and while it doesn't offer a time bound for the worst case scenario, it does offer bound in terms of memory use.
+
+By implementing this algorithm, we could stop the execution as soon as the coalition being built reached the requirements. This can greatly the execution time of the Minimal Transversal algorithm and allow it to scale to higher pool sizes. This method, since it is a depth-first approach, might even move the scaling bottleneck from the size of the EV pool to the requirements.
+
+Another algorithm, proposed in~\cite{khachiyan2005new}, for finding $k$ minimal transversals using parallel processors. The time is bound by $\text{polylog}(|V|, |H|, k)$ assuming $\text{poly}(|V|, |H|, k)$ numbers of processors. This algorithm could be the most efficient for finding a collection of minimal transversals but unfortunately an estimation for $k$ must be made first.
+
+By implementing this algorithm we could gain several advantages. For instance the algorithm would not scale with pool size anymore but only with requirements. It could eventually be faster than heuristic since it can run in multiple processors (sorting used in heuristic cannot run in multiple cores). Nevertheless, the results should generally stay the same (coalition size for example) since it is only an optimization.
+ 
+Finally, additional future work includes improving the clustering approach with an alternative method for representing the vertices in the Euclidean space; and for identifying promising clusters.	Finally, all algorithms can be equipped with multithreading capabilities, to substantially improve their performance.
+

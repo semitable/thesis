@@ -272,6 +272,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand*{\subject}[1]{\def\subjectname{#1}}
 \newcommand*{\keywords}[1]{\def\keywordnames{#1}}
 
+
 %----------------------------------------------------------------------------------------
 %	DECLARATION PAGE DESIGN
 %----------------------------------------------------------------------------------------
@@ -308,6 +309,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand{\byname}{by}
 \providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
+
 \newenvironment{abstract}{
 	\checktoopen
 	\tttypeout{\abstractname}
@@ -316,22 +318,23 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\begin{center}
 	{\normalsize \MakeUppercase{\univname} \par} % University name in capitals
 	\bigskip
-	{\huge\textit{\abstractname} \par}
-	\bigskip
-	{\normalsize \facname \par} % Faculty name
 	{\normalsize \deptname \par} % Department name
 	\bigskip
-	{\normalsize \degreename\par} % Degree name
-	\bigskip
+
+
+
 	{\normalsize\bfseries \@title \par} % Thesis title
 	\medskip
 	{\normalsize \byname{} \authorname \par} % Author name
+	\bigskip
+		{\huge\textit{\abstractname} \par}
 	\bigskip
 	\end{center}
 }
 {
   \vfil\vfil\vfil\null
 }
+
 
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS PAGE DESIGN

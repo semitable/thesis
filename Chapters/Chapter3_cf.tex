@@ -1,0 +1,44 @@
+% Chapter 1
+
+\section{Coalition Formation} % Main chapter title
+
+\label{Chapter3_cf} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+%\label{sec:introduction}
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+Coalition Formation deals with how agents can form one or more groups, called coalitions, that can tackle a common problem. CF theory analyzes several of its aspects, that range from creating such coalitions to fairly dividing rewards to the members of a coalition.  
+Individual agents usually have different degrees of efficiency. Thus, we must form groups of agents with characteristics that compliment each other and exploit their individual strengths\cite{shehory1998methods}.
+As discussed in~\cite{sandholm1999coalition}, coalition formation has three activities. {\em Coalition structure generation} (CSG), is the first of these activities, namely the partitioning of the set of agents into mutually disjoint coalitions (or groups), in a way that the resulting coalitions maximize the sum of the rewards of all agents (known as social welfare)~\cite{rahwan2009anytime}. Next is {\em the optimizations problem} of each coalition, that tries to maximize the rewards from outside the coalition and optimize the allocation of resources and tasks between agents of the respective coalition. The last activity of CF is the {\em division of the rewards} among agents. This must be done in such a way that the rewards are fair, and no agent can be motivated to leave his coalition.
+
+Finding the optimal coalition structure is generally computationally expensive, especially in a large set of agents, and the computational requirements grow exponentially. As such, finding in a reasonable time a CS that is within a bound of the optimal one, is also hard problem. There are several attempts to solve this problem~\cite{sandholm1999coalition}~\cite{rahwan2009anytime}.
+
+Nevertheless, in this thesis we will not attempt to solve the CSG problem. Instead we will focus on finding a simple coalition that is able to perform a specific task. Such a coalition will be created by selecting agents from an extensive set, in a way that the result can efficiently handle the appointed task. In addition each agent will have several attributes that contribute in different ways to the completion of the goal. We will not be using a utility function (that ultimately combines the attributes, thus losing accuracy within its particular dimensions). 
+
+By contrast, in essence we will be tackling what we call {\em multi-criteria} coalition formation, that is, the problem of forming coalitions that can accomplish a task that requires meeting a range of task-related goals: for instance, offering a minimal value of charging capacity, a minimal value of charging rate and so on. Due to the nature of this problem, the results cannot be easily evaluated. There is possibly a great number of possible coalitions with similar capacity to handle the task. In addition, since the agent set is magnitudes larger that what usual optimal CF algorithms can handle we cannot find how close to optimality our solution is. Thus we will focus on creating coalitions that can complete the task efficiently and can be generated in a minimal amount of time.
+
+This problem can be quite natural in todays world. There are several real world examples where efficiency is sacrificed for performance. In this thesis, we will present a way to form an EV coalition in just a few seconds, able to fulfill the energy requirements of the Smart Grid.
+
+%----
+
+%Electric vehicles (EVs) are a promising new concept for the automotive industry. EVs use energy stored in a battery and electric motors to generate propulsion. Electricity offers many advantages %against petrol-powered vehicles. Specifically, EVs are cost effective and require less maintenance, and thus have no emissions since they run in electricity powered engines. The growing popularity of EVs %gives rise to the so-called G2V and V2G problems. G2V describes a system where EVs connect and draw power from the Grid without overloading it\cite{valogianni2014effective}. V2G is the problem of EVs %communicating with the Grid in order to either lower their power demands or return power back to the network when there is a peak in the request for power. This helps the Grid to maintain a balanced power %load\cite{ramchurn2012putting}. This is the problem we will be dealing with in this paper.
+
+%	An important issue in the V2G problem is that there are possibly millions of EVs which communicate and connect to the Grid. The vast number of vehicles means that we must create the most appropriate %groups to cover the needs of the Grid at any given time. Algorithms that scale well and give results almost instantly are necessary. 
+
+%	In order to tackle the V2G problem, we resort to coalition formation. Specifically, we propose the formation of coalitions using hypergraphs. By doing so, we can efficiently locate reliable agents and form %effective EV cooperatives to provide sufficient energy and stability. 
+
+%	Such attempts use mostly machine learning or attempting to form the optimal coalition\cite{deORamos2014}\cite{valogianni2014effective}. This had the drawback that it did not scale to more than a few %hundred agents \cite{kamboj2010exploring} \cite{deORamos2014}. Besides, the approaches that have been used do not deal with multi-criteria optimization. This is important, however because in reality %coalitions have to be formed according to several criteria such as capacity and discharge rate. In our attempt, we will try to form coalitions by selecting vehicles from a huge pool of individual EVs using 
+% multiple criteria for our selections. 
+
+
+%	The Grid should be able to advertise the amount of power it requires by both asking for a required capacity and a maximum discharge rate. What we are trying to do is fulfill the required capacity and %discharge rate with the minimum amount of vehicles and by keeping our coalition reliable. We are not searching for an optimal coalition but rather for one that can be generated quickly and reliably. We do %this by organizing our electric vehicles inside a hypergraph. Current research and solutions on the V2G problem do not scale well. It should be noted that it is also the first attempt to use hypergraphs for %coalition generation. Hypergraphs are well studied, and powerful algorithms do exist for traversing and exploring them. 
+
+%	In a few words, we start with a huge pool of EVs. We know their power capacity, discharge rate and if they are committed to connect to the Grid. We also know their reliability. The Grid advertises the demand of a coalition with a specific capacity and discharge rate. We form a coalition that fulfills the power requirements and has a high reliability while also being small in size. 
+%	Now in order to build coalitions for the V2G we need to combine the capabilities of EVs. This naturally gives rise to a multi-criterion selection problem for choosing the members of a coalition. In order to tackle this problem, we propose a novel, principled approach in order to form coalitions that have specific characteristics. For this we employ the use of hypergraphs and research that has been done on them \cite{zhou2006learning} \cite{kavvadias2005efficient}
+
+%	In general the related work\cite{kamboj2010exploring}\cite{kamboj2011deploying}\cite{deORamos2014}\cite{valogianni2014effective} focuses in single-criteria coalition formation and in near-optimal %solutions that require great processing power and scale poorly. 
+
+%  ***** AYTO as to exoume ypopsin gia pi8anes erwthseis ****
+%First of all, while multiple criteria can usually be expressed as a single one with the help of a utility function, we find that multi-criteria is a more natural way to express the agent's attributes. As such we do not use directly utility functions.
+
+%	To continue while finding the optimal coalition is useful in most cases it can't work in real world situations where there could be millions of EVs, and the requirements could be updated every few seconds. Therefore, we sacrifice the ability to find the optimal solution so that we can process thousands of EV's in a few seconds.

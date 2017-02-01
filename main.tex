@@ -21,13 +21,13 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-
+\PassOptionsToPackage{greek, english}{babel}
 \documentclass[
 11pt, % The default document font size, options: 10pt, 11pt, 12pt
 %oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 %chapterinoneline,% Have the chapter title next to the number in one single line
-english, % ngerman for German
-doublespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%greek, english, % ngerman for German
+onehalfspacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
 %draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
 %nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
 %liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
@@ -37,21 +37,21 @@ doublespacing, % Single line spacing, alternatives: onehalfspacing or doublespac
 headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
-\usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+
 
 \usepackage{palatino} % Use the Palatino font by default
+\usepackage[dvipsnames]{xcolor}
 
 \usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{references.bib} % The filename of the bibliography
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
-
 \usepackage{algorithm}% http://ctan.org/pkg/algorithms
 \usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
-
-
+\usepackage{amsmath}
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
@@ -70,24 +70,25 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
-
 \thesistitle{Employing Hypergraphs for Efficient Coalition Formation with Application to the V2G Problem} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{Georgios \textsc{Chalkiadakis}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\supervisor{Georgios Chalkiadakis} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
-\degree{Electronic Engineer and Computer Science} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
-\author{Filippos \textsc{Christianos}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\degree{Electrical and Computer Engineer} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\author{Filippos Christianos} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
 \addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
 
 \subject{} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
 \keywords{} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{\href{http://www.tuc.gr}{Technical University of Crete}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
-\department{\href{http://www.ece.tuc.gr/}{Department of Electrical and Computer Engineering}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\department{\href{http://www.ece.tuc.gr/}{School of Electrical and Computer Engineering}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
 \group{} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
-\faculty{\href{http://faculty.university.com}{Technical University of Crete}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+\faculty{\href{http://www.tuc.gr}{Technical University of Crete}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 
 \hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
 \hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
 \hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+\hypersetup{allcolors=Maroon}
+
 
 \begin{document}
 
@@ -101,6 +102,9 @@ headsepline, % Uncomment to get a line under the header
 
 \begin{titlepage}
 \begin{center}
+	
+
+
 
 {\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
 \textsc{\Large Thesis}\\[0.5cm] % Thesis type
@@ -109,20 +113,12 @@ headsepline, % Uncomment to get a line under the header
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
 \HRule \\[1.5cm] % Horizontal line
  
-\begin{minipage}[t]{0.4\textwidth}
-\begin{flushleft} \large
 \emph{Author:}\\
-\href{http://www.johnsmith.com}{\authorname} % Author name - remove the \href bracket to remove the link
-\end{flushleft}
-\end{minipage}
-\begin{minipage}[t]{0.4\textwidth}
-\begin{flushright} \large
+{\authorname}\\ % Author name - remove the \href bracket to remove the link
 \emph{Supervisor:} \\
-\href{http://www.jamessmith.com}{\supname} % Supervisor name - remove the \href bracket to remove the link  
-\end{flushright}
-\end{minipage}\\[3cm]
- 
-\large \textit{A thesis submitted in fulfillment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
+{\supname} ({\em Associate Professor})\\ % Supervisor name - remove the \href bracket to remove the link  
+ \vspace{30pt}
+\large \textit{A thesis submitted in fulfillment of the requirements\\ for the diploma of \degreename}\\[0.3cm] % University requirement text
 \textit{in the}\\[0.4cm]
 \deptname\\\univname\\[2cm] % Research group name and department name
  
@@ -137,36 +133,66 @@ headsepline, % Uncomment to get a line under the header
 %	QUOTATION PAGE
 %----------------------------------------------------------------------------------------
 
-\vspace*{0.2\textheight}
+%\vspace*{0.2\textheight}
 
-\noindent\enquote{\itshape Lorem ipsum dolor sit amet, consectetur adipiscing elit.}\bigbreak
+%\noindent\enquote{\itshape Lorem ipsum dolor sit amet, consectetur adipiscing elit.}\bigbreak
 
-\hfill Lorem Ipsum
+%\hfill Lorem Ipsum
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
 
+
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 
-This paper proposes, for the first time in the literature, the use of {\em hypergraphs} for the efficient formation of effective coalitions.
-We put forward several formation methods that build on existing hypergraph pruning, transversal, and clustering algorithms, 
+This thesis proposes, for the first time in the literature, the use of {\em hypergraphs} for the efficient formation of effective agent coalitions.
+We put forward several formation methods that build on existing hypergraph pruning, transversal, clustering and hybrid algorithms, 
 and exploit the hypergraph structure to identify agents with desirable characteristics.
 Our approach allows the near-instantaneous formation of high quality coalitions, adhering to multiple stated quality requirements.
 Moreover, our methods are shown to scale to {\em dozens of thousands} of agents within fractions of a second; with one of them scaling to even {\em millions} of agents within seconds. We apply our approach to the problem of forming coalitions to provide {\em (electric) vehicle-to-grid (V2G)} services.
-Ours is the first approach able to deal with {\em large-scale}, {\em real-time} coalition formation for the V2G problem, while taking {\em multiple criteria} into account for creating the electric vehicle coalitions.
-
+Ours is the first approach able to deal with {\em large-scale}, {\em real-time} coalition formation for the V2G problem, while taking {\em multiple criteria} into account for creating the electric vehicle coalitions. A sketch of these ideas appeared originally in a short paper in the 22nd European Conference on Artificial Intelligence (ECAI-2016). Afterwards, a full paper describing our work was published in the 14th European Conference on Multi-Agent Systems (EUMAS-2016).
 \end{abstract}
+\thesistitle{\textgreek{Χρήση υπεργράφων για την αποτελεσματική δημιουργία συνασπισμών με εφαρμογή στο πρόβλημα} V2G\textgreek{.}}
+\author{\textgreek{Φίλιππος Χριστιανός}}
+
+\university{\href{http://www.tuc.gr}{\greektext{Πολυτεχνείο Κρήτης}}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\department{\href{http://www.ece.tuc.gr/}{\greektext{Τμήμα Ηλεκτρολόγων Μηχανικών και Μηχανικών Υπολογιστών}}}
+
+\degree{\greektext{Ηλεκτρολόγος Μηχανικός και Μηχανικός Υπολογιστών}} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\faculty{\href{http://www.tuc.gr}{\greektext{Πολυτεχνείο Κρήτης}}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+
+
+\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{\greektext{}}
+\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\abstractname}{\greektext{Περίληψη}}
+
+\begin{abstract}
+	\selectlanguage{greek}
+	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+	
+	Αυτή η διπλωματική εισάγει, για πρώτη φορά στη βιβλιογραφία, την χρήση {\em υπεργράφων} για την ταχεία δημιουργία αποτελεσματικών συνασπισμών αυτόνομων πρακτόρων.
+	Προτείνουμε ορισμένες μεθόδους σχηματισμού, που βασίζονται σε υπάρχοντες αλγορίθμους υπεργράφων, όπως οι \selectlanguage{english} pruning, transversal, clustering \textgreek{και} hybrid, \selectlanguage{greek} και εκμεταλλευόμαστε την δομή του υπεργράφου για να εντοπίσουμε πράκτορες με επιθυμητά χαρακτηριστικά.
+	Η προσέγγισή μας επιτρέπει τον σχεδόν στιγμιαίο σχηματισμό συνασπισμών υψηλής ποιότητας, ικανοποιώντας πολλαπλές ποιοτικές απαιτήσεις.
+	Επιπλέον, οι μέθοδοί μας κλιμακώνονται ώστε να δέχονται {\em δεκάδες χιλιάδες} πράκτορες ως είσοδο και να εμφανίζουν τα αποτελέσματα μέσα σε κλάσματα του δευτερολέπτου, με μια από αυτές να λειτουργεί με {\em εκατομμύρια} πράκτορες μέσα σε δευτερόλεπτα. Εφαρμόζουμε την προσέγγισή μας στο πρόβλημα της δημιουργίας συνασπισμών για την παροχή ρεύματος από {\em ηλεκτρικά οχήματα προς το ηλεκτρικό δίκτυο (το λεγόμενο πρόβλημα \selectlanguage{english}Vehicle-to-Grid\selectlanguage{greek}, ή\selectlanguage{english} V2G\selectlanguage{greek})}.
+	Η προσέγγισή μας είναι η πρώτη που είναι σε θέση να ασχοληθεί με {\em μεγάλης κλίμακας}, και σε {\em πραγματικό χρόνο} σχηματισμό συνασπισμών για το πρόβλημα \selectlanguage{english}V2G\selectlanguage{greek}, λαμβάνοντας υπ'όψιν {\em πολλαπλά κριτήρια} για τη δημιουργία των συνασπισμών ηλεκτρικών οχημάτων. Ένα προσχέδιο των ιδεών αυτών εμφανίστηκε αρχικά σε μια σύντομη δημοσίευση στο 22ο \selectlanguage{english}{\em European Conference on Artificial Intelligence (ECAI-2016)}\selectlanguage{greek} και έπειτα σε μια πλήρη στο 14o \selectlanguage{english}{\em European Conference on Multi-Agent Systems (EUMAS-2016)}\selectlanguage{greek}.
+	
+\end{abstract}
+\selectlanguage{english}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
-
+%
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
 
-The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+I would like to thank all the people who contributed in some way to the work described in this
+thesis. First and foremost, I would like to express my gratitude to my supervisor Georgios Chalkiadakis for his patience, motivation and knowledge. His guidance helped me immensely during the research and writing of this thesis. 
 
+Besides my advisor, I would like to thank Stefanos, Dimitris, Tonia and Panagiotis for being great friends and offering me invaluable support throughout these years. I would like to especially thank Dafne for all her love, support and helpful advice.
+
+To my family, thank you for encouraging me in all
+of my pursuits and inspiring me to follow my dreams. I am especially grateful to my parents, Rania and Vassilis, who supported me emotionally and financially and always wanted the best for me. This thesis is dedicated to them.
 \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
@@ -183,17 +209,19 @@ The acknowledgments and the people to thank go here, don't forget to include you
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
 
-\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+%\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
 
-\textbf{CF} & \textbf{C}oalition \textbf{F}ormation\\
-\textbf{CS} & \textbf{C}oalition \textbf{S}tructure\\
-\textbf{CSF} & \textbf{C}oalition \textbf{S}tructure \textbf{G}eneration\\
-\textbf{EV} & \textbf{E}lectric \textbf{V}ehicle\\
-\textbf{G2V} & \textbf{G}rid to \textbf{V}ehicle\\
-\textbf{V2G} & \textbf{V}ehicle to \textbf{G}rid\\
+%\textbf{CF} & \textbf{C}oalition \textbf{F}ormation\\
+%\textbf{CS} & \textbf{C}oalition \textbf{S}tructure\\
+%\textbf{CSF} & \textbf{C}oalition \textbf{S}tructure \textbf{G}eneration\\
+%\textbf{EV} & \textbf{E}lectric \textbf{V}ehicle\\
+%\textbf{G2V} & \textbf{G}rid to \textbf{V}ehicle\\
+%\textbf{V2G} & \textbf{V}ehicle to \textbf{G}rid\\
+%\textbf{SoC} & \textbf{S}tate of \textbf{C}harge\\
+%\textbf{MAS} & \textbf{M}ulti\textbf{A}gent \textbf{S}ystems\\
 
 
-\end{abbreviations}
+%\end{abbreviations}
 
 
 %----------------------------------------------------------------------------------------
@@ -207,22 +235,25 @@ The acknowledgments and the people to thank go here, don't forget to include you
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-\include{Chapters/Chapter1}
-\include{Chapters/Chapter2} 
-\include{Chapters/Chapter3}
-\include{Chapters/Chapter4} 
-%\include{Chapters/Chapter5} 
+\include{Chapters/Chapter1_intro}
+\include{Chapters/Chapter2_evs} 
+\include{Chapters/Chapter3_cf}
+\include{Chapters/Chapter4_hg} 
+\include{Chapters/Chapter5_related}
+\include{Chapters/Chapter6_approach}
+\include{Chapters/Chapter7_results}
+ \include{Chapters/Chapter8_conclusions}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-\include{Appendices/AppendixA}
+%\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 

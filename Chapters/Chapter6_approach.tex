@@ -2,7 +2,7 @@
 
 \chapter{Our Approach} % Main chapter title
 
-\label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{Chapter6_approach} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 
 %----------------------------------------------------------------------------------------
 
@@ -13,21 +13,16 @@
 
 %\section{}\label{sec:approach}
 
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.5]{hypergraph.png}
-	\caption{A simple hypergraph\label{fig:hypergraph}}
-\end{figure}
-\begin{figure}
-	\centering
-		\centering
-		\includegraphics[scale=0.5]{hypergraph_prune.png}
-		\caption{Pruning a simple hypergraph\label{fig:hypergraph_prune}}
-	
-\end{figure}
 
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=1]{hypergraph.png}
+	\caption{Storing EVs in a hypergraph\label{fig:hypergraph}}
+\end{figure}
 In order to develop multi-criteria coalition formation algorithms that generate coalitions efficiently, we employ the concept of {\em a hypergraph}.
 A hypergraph $H = (V, E)$ is a generalization of a graph, where each {\em hyperedge} $e \in E$ can contain any number of {\em vertices (or nodes)} in the set $V$.
+
 Vertices in $H$ correspond to agents; while we view a hyperedge as corresponding to some particular {\em attribute} or {\em characteristic} possessed by the agents in the hyperedge.
 In the V2G setting, the agents correspond to EVs (i.e., an EV is represented by a node in our hypergraph); while the hyperedges correspond to vehicle characteristics. More specifically, a hyperedge corresponds to a ``quality level'' of some EV attribute, as we explain below.
 
@@ -36,7 +31,13 @@ In order to represent the different {\em quality} of the various hyperedges, and
 	$u$ 
 	is the sum of the weights of its edges}. Intuitively, {\em a high degree node is a high quality one}. This fact is exploited in our algorithms below.
 A hyperedge (of a given quality) will be also called a {\em category}. The (quality of the) categories to which an EV belongs will be influencing the decisions of our {\em hypergraph pruning} algorithm, which we describe in Section~\ref{sec:pruning} below. A node that belongs to a hyperedge characterizing the quality of a given agent attribute, cannot belong to some other hyperedge characterizing the quality of the same attribute.
-
+\begin{figure}
+	\centering
+	\centering
+	\includegraphics[scale=1]{hypergraph_prune.png}
+	\caption{Pruning the hypergraph\label{fig:hypergraph_prune}}
+	
+\end{figure}
 
 To illustrate the use of hypergraphs in our setting, consider for example the hypergraph of Fig.~\ref{fig:hypergraph}, which contains the hyperedges $e_{1...6}$ and vertices $u_{1...7}$. It is clear in this example that vertices may belong to multiple hyperedges: the hyperedge $e_1$ contains the vertices $u_{3,4,6,7}$, while the vertex $u_1$ belongs in the hyperedges $e_2, e_5, e_4$. Vertices in Fig.~\ref{fig:hypergraph} correspond to EVs; while the hyperedges correspond to the ``quality'' of the following EV attributes: \textit{capacity}, {\em discharge rate} and \textit{observed reliability}. The meaning of these attributes is intuitively straightforward, but will be nevertheless explained in Section~\ref{subsec:criteria} below. Each attribute is related to at least one hyperedge in the hypergraph. For instance, in Fig.~\ref{fig:hypergraph}, the {\em capacity} attribute is represented by three hyperedges in the hypergraph: {\em low-capacity}, {\em medium-capacity}, and {\em high-capacity}. As noted above, no node can belong in more than one capacity-related hyperedges. In our figure, 
 \begin{itemize}
@@ -63,27 +64,27 @@ For example, it is conceivable that we want to use agents with {\em high capacit
 
 The algorithms presented in this work can be employed by any entity or enterprice (such as the Grid, utility companies or Smart Grid cooperatives) that wants to form EV coalitions for the V2G problem, using any set of criteria of its choosing. Here we identify three such natural criteria, namely \textit{reliability, capacity} and \textit{discharge rate}. These formation criteria are consistently mentioned in the related literature, though perhaps not with these exact names, and not explicitly identified as such~\cite{kamboj2010exploring,kamboj2011deploying,valogianni2014effective}.
 
-First of all, a coalition has to be consistently {\em reliable}, i.e. it should be able to serve the power that has been requested without any disruptions. For a coalition to be reliable, its members must be reliable too, and gaps in reliability must be met with backup agents. We define {\em agent reliability} as {\em the estimated probability that an agent will fulfill its promises}. The {\em promise} of an agent is its {\em commitment} on being connected to the Grid during a specific time slot in order to contribute via providing energy to the Grid, if so requested. Such slots naturally correspond to electricity trading intervals.
+First of all, a coalition has to be consistently {\em reliable}, i.e. it should be able to provide the power that has been requested without any disruptions. For a coalition to be reliable, its members must be reliable too, and gaps in reliability must be met with backup agents. We define {\em agent reliability} as {\em the estimated probability that an agent will fulfill its promises}. The {\em promise} of an agent is its {\em commitment} on being connected to the Grid during a specific time slot in order to contribute via providing energy to the Grid, if so requested. Such slots naturally correspond to electricity trading intervals.
 
-%Since the coalitions are formed to offer power services in future time slots, agents can be asked to state their availability.
-%This availability is stored in commitment hyperedge .
+Since the coalitions are formed to offer power services in future time slots, agents can be asked to state their availability.
+This availability is stored in commitment hyperedge .
 
 In addition, a coalition must fulfill a {\em capacity} requirement. 
 The {\em capacity} of a coalition is the amount of electricity (measured in $kWh$) the coalition will be offering to the Grid; 
 while the capacity of en EV is, similarly, the amount of electricity (in $kWh$) the EV will be offering to the Grid.
 In fact, gathering enough EV capacity to cover the Grid needs during high demand periods, is the main objective of any V2G solution. 
-%Naturally, creating a coalition to meet a high power peak requires a considerable amount of capacity offered. 
-%On the other hand minor peaks can be stabilised by building EV coalitions with a much lower capacity.
+Naturally, creating a coalition to meet a high power peak requires a considerable amount of capacity offered. 
+On the other hand minor peaks can be stabilised by building EV coalitions with a much lower capacity.
 
 Another factor in the V2G problem is the {\em discharge rate} of a coalition (or, of a single EV)---the rate by which the coalition (resp., the EV) is able to provide (electrical) energy to the Grid over a specified time period. Discharge rate is measured in $kW.$ % (=$kWh / h$).
 A high coalitional discharge rate could be required in cases where capacity should be offered within a small amount of time, for example when the Grid is under a heavy demand load. 
 Naturally, a coalition has a high discharge rate if its members discharge rates are high; for our purposes, we assume that the discharge rate is additive, i.e., the discharge rate of a coalition is the sum of its EVs discharge rates.
-In Section~\ref{sec:results}, we will be forming coalitions in order to meet specific capacity and discharge rate targets; and observing how reliable the coalitions meeting these targets are.
+In Chapter~\ref{Chapter7_results}, we will be forming coalitions in order to meet specific capacity and discharge rate targets; and observing how reliable the coalitions meeting these targets are.
 
 Now, the hypergraph used in our current implementation was designed so that it could easily satisfy requests pertaining to these particular criteria.
-As such, there was a total of $25$ hyperedges in the hypegraph---\{{\em extremely-high, very-high, high, medium-high, medium-low, low, very-low, extremely-low}\} $\times$ \{{\em capacity, discharge rate, reliability}\}; and a {\em committed} one, containing EVs that have stated they will be connecting to the Grid during the particular slot.%\footnote{We could have stored the commitment of the EVs on a ``per time slot'' basis, by using several hyperedges (one per slot) without any additional cost. However, in our experiments, we focus on a single time slot only.}
+As such, there was a total of $25$ hyperedges in the hypegraph---\{{\em extremely-high, very-high, high, medium-high, medium-low, low, very-low, extremely-low}\} $\times$ \{{\em capacity, discharge rate, reliability}\}; and a {\em committed} one, containing EVs that have stated they will be connecting to the Grid during the particular slot.\footnote{We could have stored the commitment of the EVs on a ``per time slot'' basis, by using several hyperedges (one per slot) without any additional cost. However, in our experiments, we focus on a single time slot only.}
 
-In our model, we assume that, at any time step that this is required---due to a consumption peak, an unplanned event, or the need to regulate frequency and voltage---the Grid (or some other entity) advertises its demand for a V2G coalition with several desirable characteristics. As noted in~\cite{kamboj2011deploying}, individual EVs are well-suited for providing services at short notice. What we show in this paper, is that we can select agents from a huge pool of EVs to form {\em coalitions} that are able to provide large amounts of power at short notice, and with high reliability.
+In our model, we assume that, at any time step that this is required---due to a consumption peak, an unplanned event, or the need to regulate frequency and voltage---the Grid (or some other entity) advertises its demand for a V2G coalition with several desirable characteristics. As noted in~\cite{kamboj2011deploying}, individual EVs are well-suited for providing services at short notice. What we show in this thesis, is that we can select agents from a huge pool of EVs to form {\em coalitions} that are able to provide large amounts of power at short notice, and with high reliability.
 
 
 %To effectively extract nodes from the hypergraph we put forward the following three methods.
@@ -122,11 +123,11 @@ Algorithm~\ref{alg:pruning} is our implementation of pruning. The algorithm iter
 keeps only the nodes belonging to hyperedges that correspond to the specified ``categories of interest'' ({\em CategoriesKept} in Alg.~\ref{alg:pruning}).
 
 In our implementation, the {\em CategoriesKept} are heuristically selected, and depend on the algorithms. For instance, the {\em minimal transversal} algorithm requires a more aggressive pruning, since its complexity is sensitive to the number of nodes used as input (cf. Section~\ref{sec:transversal}), and we therefore empirically feed it with as few hyperedges as possible. 
-%In section~\ref{sec:generating} we provide ~\ref{tab:pruningres} showing the efficiency of our pruning algorithm.
+In section~\ref{sec:generating} we provide Table~\ref{tab:pruningres} showing the efficiency of our pruning algorithm.
 
 Our experimentation indicates that the use of pruning can lead to a significantly smaller hypergraph, and to vast improvements in terms of execution time for our algorithms.  In our simulations, the hypergraphs are pruned to about $1/20$ of the initial size of the EVs pool, without sacrificing the methods' performance (cf. Section~\ref{sec:generating}). Moreover, pruning using Algorithm~\ref{alg:pruning} is almost instantaneous.
 
-\section{Minimal Transversal Algorithm} \label{sec:transversal}
+\section{A Minimal Transversal Algorithm} \label{sec:transversal}
 Using hypergraphs allows to use an intuitive approach  for locating agents for coalitions: to generate the set of \textit{minimal transversals} for the \textit{high-value hyperedges}~\cite{eiter1995identifying}. A \textit{transversal} (or \textit{hitting set}) of a hypergraph H, is a set $T\subseteq V$ with hyperedges $X$ where $X = E$ (i.e., vertices in $T$ belong to \textit{all} hyperedges in $E$). A \textit{minimal transversal} is a set that does not contain a subset that is a hitting set of $H$.  As such\footnote{Of course there can be more than one minimal transversals, and it is not necessary that they have the same cardinality.}, generating several minimal transversal sets for \textit{high-quality} hyperedges is expected to identify agents which are high-quality and should be used in the formation of a coalition. Subsequently, we join those agents together until our criteria are met. 
 
 Our approach with the minimal transversal set is to prune all edges but those of extremely high quality that are also ``committed'', as seen in Algorithm~\ref{alg:transversal}. Then we generate progressively the minimal hitting sets, using an algorithm similar to \cite{eiter1995identifying}. That is, we first generate the minimal hitting sets containing one node, then those with two, and so on. Then we randomly pick agents belonging to those minimal transversals, until the coalitions requirements are met. If the requirements are met during the progressive minimal transversal generation process, no further minimal transversals are generated.
@@ -157,7 +158,9 @@ This method creates a set of agents with uniformly distributed high-quality char
 
 Line 6 of Algorithm~\ref{alg:transversal} is our implementation of minimal transversal~\cite{eiter1995identifying}. Though there is no known polynomial time algorithm for the general hypergraph transversal problem, the algorithm given was shown experimentally to behave well in practice, and its memory requirements are polynomially bounded by the size of the input hypergraph, though it comes without bounds to its running time.
 
-\section{Clustering Algorithm}\label{sec:Clustering}
+
+
+\section{A Clustering Algorithm}\label{sec:Clustering}
 The second approach is to create clusters of agents. After creating said clusters, we efficiently calculate the best cluster and then sample EVs from that group until our coalition criteria are met.
 
 In more detail, we first generate a hypergraph of EV agents with the characteristics described previously. Then, hypergraph clustering is performed.
@@ -173,11 +176,11 @@ We begin by implementing functions that calculate
 	\item{\em the Adjacency Matrix}: A matrix defined as $A = HWH^T - D_u$
 \end{itemize}
 The matrices above are used for the final calculations of the hypergraph \textit{Laplacian matrix}. This a matrix representation of a graph, that has information on the degrees of the nodes, and their connections with the hyperedges (cf.~\cite{zhou2006learning}, Section 5). 
-%After its calculation, the Laplacian contains the node degrees in its diagonal (which enables us to discard the $D_u$ matrix, for memory efficiency).
+After its calculation, the Laplacian contains the node degrees in its diagonal (which enables us to discard the $D_u$ matrix, for memory efficiency).
 
 As explained in~\cite{zhou2006learning}, having the Laplacian, enables us to calculate the $\Phi$ eigenvectors $[\Phi_1 ... \Phi_k]$ corresponding to the $k$ lowest eigenvalues. These can then define $X = [\Phi_1 ... \Phi_k]$, a matrix that can be employed for $k$-way partitioning to cluster our agents. This is achieved via running the $k$-{\em means} algorithm \cite{hartigan1979algorithm} on the row vectors of $X$\cite{zhou2006learning}. As explained in \cite{zhou2006learning}, the rows of X are representations of the hypergraph vertices in the $k$-dimensional Euclidean space. Of course, choosing a value for $k$ has to be decided empirically. In Section~\ref{sec:results_modifications} we will be testing different values for $k$. 
 After generating the clusters, we are given the task to locate the ``best'' cluster among them. To do this efficiently, we simply sort them by looking at {\em the average of the node degrees}.
-%\footnote{Note that the Laplacian matrix can also be used to extract easily high-quality agents, by retrieving nodes that have high values (high node degrees) in its diagonal.}
+\footnote{Note that the Laplacian matrix can also be used to extract easily high-quality agents, by retrieving nodes that have high values (high node degrees) in its diagonal.}
 This provides us with a cluster that is better than the rest. We then sample nodes from the best cluster until our criteria are met. Algorithm~\ref{alg:clustering} summarizes the method.
 
 \begin{algorithm}
@@ -201,7 +204,31 @@ While using a minimal transversal generates quality sets of agents, computing th
 
 Thus, our heuristic method operates as follows. {\em (1)} First, we prune the hypergraph to include only ``promising'' nodes and hyperedges. For instance, we exclude nodes not in {\em extremely high} or in {\em very high} hyperedges. {\em (2)} Then we sort the remaining nodes based on their node degree. {\em (3)}  Finally, we pick the highest degree nodes from the list until the coalition criteria are met. By starting at the top of the list, we can guarantee that agents have many positive characteristics. 
 
-We can see at step {\em (1)} above, that this algorithm, like the rest of our methods, employs pruning. As such, it does exploit the hypergraph structure. However, in practice the algorithm can deliver excellent results without much pruning. In our experiments in Section~\ref{sec:results} below, the heuristic approach is shown to outperform the rest while pruning only the non-committed nodes in the hypergraph. In fact, one strength of this approach is that it does not {\em rely} on pruning, since its complexity is low: essentially, that of the algorithm employed for sorting (i.e., $O(nlogn)$, since we use with Python's built-in {\em Timsort} algorithm). By not relying on pruning, the algorithm can focus on promising nodes with high node degree (and, therefore, quality), irrespective of the exact hyperedges to which they belong.
+We can see at step {\em (1)} above, that this algorithm, like the rest of our methods, employs pruning. As such, it does exploit the hypergraph structure. However, in practice the algorithm can deliver excellent results without much pruning. In our experiments in Chapter~\ref{Chapter7_results} below, the heuristic approach is shown to outperform the rest while pruning only the non-committed nodes in the hypergraph. In fact, one strength of this approach is that it does not {\em rely} on pruning, since its complexity is low: essentially, that of the algorithm employed for sorting (i.e., $O(nlogn)$, since we use with Python's built-in {\em Timsort} algorithm). By not relying on pruning, the algorithm can focus on promising nodes with high node degree (and, therefore, quality), irrespective of the exact hyperedges to which they belong.
+
+\section{A Hybrid Algorithm} \label{sec:hybrid}
+
+In an attempt to exploit the strengths of each method we devised a hybrid algorithm that selected agents using both the transversal and heuristic method. As mentioned above, the transversal algorithm has the ability to find coalitions that are good in all aspects. The heuristic algorithm though, identifies single agents that are good depending on the weight of the edges.
+
+The hybrid method works as follows. {\em (1)}It prunes the hypergraph using the methods described to shrink the size of the pool. {\em (2)}Then the transversal algorithm runs and generates a coalition with $k$ times the needed goals. The agents of the new coalition are $V_1 \subset V$.  {\em (3)} Finally, instead of randomly selecting agents from the minimal transversals generated, the heuristic method runs on a hypergraph $H_1 = (V_1, E)$ and selects the final coalition. It will also fill in the rest of the gaps in the coalition  if required. This is better shown in~\ref{alg:hybrid}.
+
+Thus, the hybrid method can guarantee that coalitions generated share the properties of coalitions formed through the simple transversal algorithm, but also manages a better quality by selecting the best agents using the heuristic method. 
+
+\begin{algorithm}
+	\caption{Coalition formation using Hybrid Approach}\label{alg:hybrid}
+	\begin{algorithmic}[1]
+		\Procedure{Hybrid}{$H$}
+		\State $H \gets Prune(H, (vhigh \cup exhigh))$ \Comment exhigh and vhigh signify the sets of extremely high and very high quality hyperedges respectively
+		\State Generate a coalition $V_1 \subset V$ using algorithm~\ref{alg:transversal} but using $k$ times the requirements (goals) needed. (k is empirically selected)
+		\State Generate a hypergraph $H = (V_1, E)$ and run the heuristic algorithm for possibly the final coalition.
+		\State If needed (k < 1), run heuristic again to fill in the gaps. 
+		
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+This method does have a disadvantage. While the resulting coalitions are of high quality, the runtime is much higher than the simple methods since both algorithms run sequentially (with a lower goal, though). Nevertheless, the runtime is still low and can be further reduced using methods discussed in Chapter~\ref{Chapter8_results}.
+
 
 \section{A Simple Sampling Method}
 For interest, and in order to have a benchmark for the rest of our algorithms, a simple sampling algorithm was also developed. The algorithm takes random samples until the specified goals are achieved.
