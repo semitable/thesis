@@ -163,14 +163,14 @@ def main(args):
 
     if(args.transversal):
         startTime = time.time()
-        R = transversal.run(HG.prune(lambda e: e.category==Category.vhigh, "this"), args)
+        R = transversal.run(HG.prune(lambda e: e.category==Category.exhigh, "this"), args)
         elapsed = time.time() - startTime
         rateCoalition(args, R, elapsed, "Transversal")
 
     #print(HG.edges)
     if(args.clustering):
         startTime = time.time()
-        R = clustering.run(HG.prune(lambda e: e.category==Category.vhigh, "all"), args)
+        R = clustering.run(HG.prune(lambda e: e.category==Category.exhigh, "all"), args)
         elapsed = time.time() - startTime
         rateCoalition(args, R, elapsed, "Clustering")
 
@@ -204,7 +204,7 @@ def testchangingk(args):
         for j in range (50):
             HG = Generate(args.nodes)
             HG = HG.prune(lambda e: e.category==Category.boolean, "all")
-            answer = clustering.run(HG.prune(lambda e: e.category==Category.vhigh, "all"), args, k = k)
+            answer = clustering.run(HG.prune(lambda e: e.category==Category.exhigh, "all"), args, k = k)
             if(answer):
                 medsize.append(len(answer))
         cluster_size.append(np.mean(medsize))
